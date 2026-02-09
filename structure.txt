@@ -1,0 +1,32 @@
+MINI OLD/
+│
+├── app.py
+├── routes.py
+├── auth.py
+├── models.py
+├── utils.py
+├── requirements.txt
+│
+├── static/
+│   ├── css/
+│   │   ├── style.css
+│   │   ├── login.css
+│   │   └── signup.css
+│   │
+│   ├── js/
+│   │   ├── login.js
+│   │   ├── signup.js
+│   │   ├── script.js
+│   │   └── charts.js      
+│   │
+│   └── assets/
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   ├── signup.html
+│   ├── new-user.html
+│   └── dashboard.html     
+│
+└── instance/
+    └── database.db
