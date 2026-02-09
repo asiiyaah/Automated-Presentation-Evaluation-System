@@ -46,7 +46,9 @@
             <div class="input-group">
                 <img src="../static/assests/Lock.svg" class="icon">
                 <input type="password" id="login_password" name="password" placeholder="Password" required>
-                <img src="../static/assests/Eye.svg" class="eye" onclick="togglePassword('login_password')">
+                <img src="../static/assests/Eye.svg" class="eye" data-target="login_password">
+
+
             </div>
 
             <div class="forgot">
@@ -70,13 +72,8 @@
 
     </div>
 
-    <!-- JS -->
-    <script>
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            input.type = input.type === "password" ? "text" : "password";
-        }
-    </script>
+    <script type="module" src="../static/js/login.js"></script>
+    <script src="../static/js/script.js"></script>
 
 </body>
 

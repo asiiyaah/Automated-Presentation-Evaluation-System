@@ -21,3 +21,16 @@ window.logout = function () {
     window.location.href = "login.html";
   });
 };
+
+/* =======================
+   UI TOGGLES
+======================= */
+window.toggleSidebar = function () {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("open");
+};
+
+window.toggleProfile = function () {
+  const profilePanel = document.getElementById("profilePanel");
+  profilePanel.classList.toggle("open");
+};
