@@ -180,3 +180,40 @@ body {
   height: 60px;
   object-fit: contain;
 }
+
+.google-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: #fff;
+  color: #333;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.google-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.google-btn:hover {
+  background: #f7f7f7;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.google-btn:active {
+  transform: scale(0.98);
+}
