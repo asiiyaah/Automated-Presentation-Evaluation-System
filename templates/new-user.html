@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New User Dashboard</title>
+  <link rel="stylesheet" href="../static/css/new-user.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+    <div class="profile-icon" onclick="toggleProfile()">👤</div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <h3>Your Tags</h3>
+
+    <div class="empty-state">
+      <p>No tags created yet</p>
+      <small>
+        Create a tag for each person to track
+        presentation performance over time.
+      </small>
+
+      <button class="add-tag-btn">+ Create Tag</button>
+    </div>
+
+    <h3>Quick Actions</h3>
+    <ul>
+      <li>Upload Presentation</li>
+      <li>How It Works</li>
+    </ul>
+  </aside>
+
+  <!-- PROFILE PANEL -->
+  <aside class="profile-panel" id="profilePanel">
+    <h3>Your Profile</h3>
+    <p><strong>Name:</strong> New User</p>
+    <p><strong>Email:</strong> user@email.com</p>
+
+    <hr />
+
+    <p>Tags Created: 0</p>
+    <p>Videos Uploaded: 0</p>
+
+    <button class="profile-btn">Edit Profile</button>
+    <button class="profile-btn logout">Logout</button>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <main class="hero">
+    <h1>ELEVATE YOUR PRESENTATION</h1>
+    <h2>SKILLS USING AI INSIGHTS</h2>
+
+    <button class="cta-btn">GET STARTED →</button>
+  </main>
+
+  <!-- JS -->
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("open");
+    }
+
+    function toggleProfile() {
+      document.getElementById("profilePanel").classList.toggle("open");
+    }
+  </script>
+
+</body>
+</html>
