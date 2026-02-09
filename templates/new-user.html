@@ -1,73 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New User Dashboard</title>
-  <link rel="stylesheet" href="../static/css/new-user.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New User Dashboard</title>
+    <link rel="stylesheet" href="../static/css/new-user.css" />
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-    <div class="profile-icon" onclick="toggleProfile()">👤</div>
-  </header>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+        <div class="profile-icon" onclick="toggleProfile()">👤</div>
+    </header>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <h3>Your Tags</h3>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h3>Your Tags</h3>
 
-    <div class="empty-state">
-      <p>No tags created yet</p>
-      <small>
-        Create a tag for each person to track
-        presentation performance over time.
-      </small>
+        <div class="empty-state">
+            <p>No tags created yet</p>
+            <small>
+                Create a tag for each person to track
+                presentation performance over time.
+            </small>
 
-      <button class="add-tag-btn">+ Create Tag</button>
-    </div>
+            <button class="add-tag-btn">+ Create Tag</button>
+        </div>
 
-    <h3>Quick Actions</h3>
-    <ul>
-      <li>Upload Presentation</li>
-      <li>How It Works</li>
-    </ul>
-  </aside>
+        <h3>Quick Actions</h3>
+        <ul>
+            <li>Upload Presentation</li>
+            <li>How It Works</li>
+        </ul>
+    </aside>
 
-  <!-- PROFILE PANEL -->
-  <aside class="profile-panel" id="profilePanel">
-    <h3>Your Profile</h3>
-    <p><strong>Name:</strong> New User</p>
-    <p><strong>Email:</strong> user@email.com</p>
+    <!-- PROFILE PANEL -->
+    <aside class="profile-panel" id="profilePanel">
+        <h3>Your Profile</h3>
+        <p><strong>Name:</strong> <span id="userName">New User</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">user@email.com</span></p>
 
-    <hr />
 
-    <p>Tags Created: 0</p>
-    <p>Videos Uploaded: 0</p>
+        <hr />
 
-    <button class="profile-btn">Edit Profile</button>
-    <button class="profile-btn logout">Logout</button>
-  </aside>
+        <p>Tags Created: 0</p>
+        <p>Videos Uploaded: 0</p>
 
-  <!-- HERO SECTION -->
-  <main class="hero">
-    <h1>ELEVATE YOUR PRESENTATION</h1>
-    <h2>SKILLS USING AI INSIGHTS</h2>
+        <button class="profile-btn">Edit Profile</button>
+        <button class="profile-btn logout" onclick="logout()">Logout</button>
 
-    <button class="cta-btn">GET STARTED →</button>
-  </main>
+    </aside>
 
-  <!-- JS -->
-  <script>
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("open");
-    }
+    <!-- HERO SECTION -->
+    <main class="hero">
+        <h1>ELEVATE YOUR PRESENTATION</h1>
+        <h2>SKILLS USING AI INSIGHTS</h2>
 
-    function toggleProfile() {
-      document.getElementById("profilePanel").classList.toggle("open");
-    }
-  </script>
+        <button class="cta-btn">GET STARTED →</button>
+    </main>
+
+    <script type="module" src="../static/js/new-user.js"></script>
+
 
 </body>
+
 </html>
