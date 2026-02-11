@@ -23,14 +23,39 @@ window.logout = function () {
 };
 
 /* =======================
-   UI TOGGLES
+   UI TOGGLES (RIGHT SIDE)
 ======================= */
+
+const sidebar = document.getElementById("sidebar");
+const profilePanel = document.getElementById("profilePanel");
+
+// OPEN / CLOSE TAGS
 window.toggleSidebar = function () {
-  const sidebar = document.getElementById("sidebar");
   sidebar.classList.toggle("open");
+  profilePanel.classList.remove("open"); // close profile
 };
 
+// OPEN / CLOSE PROFILE
 window.toggleProfile = function () {
-  const profilePanel = document.getElementById("profilePanel");
   profilePanel.classList.toggle("open");
+  sidebar.classList.remove("open"); // close sidebar
 };
+
+// CLICK ANYWHERE TO CLOSE
+document.addEventListener("click", (e) => {
+  const clickedInsideSidebar = sidebar.contains(e.target);
+  const clickedInsideProfile = profilePanel.contains(e.target);
+  const clickedMenuIcon = e.target.closest(".menu-icon");
+  const clickedProfileIcon = e.target.closest(".profile-icon");
+
+  if (
+    !clickedInsideSidebar &&
+    !clickedInsideProfile &&
+    !clickedMenuIcon &&
+    !clickedProfileIcon
+  ) {
+    sidebar.classList.remove("open");
+    profilePanel.classList.remove("open");
+  }
+});
+

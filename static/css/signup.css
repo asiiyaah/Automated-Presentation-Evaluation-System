@@ -20,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   padding: 0 40px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -40,14 +40,19 @@ body {
   cursor: pointer;
 }
 
-.nav-login {
-  background: #142d6c;
+.nav-bar nav a {
+  margin-left: 25px;
+  text-decoration: none;
   color: white;
-  border: none;
-  padding: 10px 30px;
-  border-radius: 25px;
-  font-size: 16px;
-  cursor: pointer;
+  background: #142d6c;
+  padding: 6px 18px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.nav-bar nav a:hover {
+  background: #1e40af;
+  transition: 0.3s;
 }
 
 /* SIGNUP FORM */
@@ -57,7 +62,7 @@ body {
   background: white;
   padding: 40px;
   border-radius: 30px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
 .signup-title {
@@ -138,7 +143,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* IMPORTANT */
+  overflow: hidden;
+  /* IMPORTANT */
 }
 
 .logo img {
@@ -177,7 +183,7 @@ body {
 
 .google-btn:hover {
   background: #f7f7f7;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .google-btn:active {

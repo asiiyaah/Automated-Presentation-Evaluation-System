@@ -20,13 +20,6 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.logo {
-  width: 50px;
-  height: 50px;
-  background: #142d6c;
-  border-radius: 50%;
-}
-
 .brand {
   font-size: 32px;
   font-weight: 900;
@@ -37,14 +30,20 @@ body {
   cursor: pointer;
 }
 
-.nav-login {
-  background: #142d6c;
-  color: white;
-  border: none;
-  padding: 10px 30px;
-  border-radius: 25px;
-  cursor: pointer;
+.nav-bar nav a {
+  margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    background: #142d6c;
+    padding: 6px 18px;
+    border-radius: 10px;
+    font-size: 20px;
 }
+.nav-bar nav a:hover {
+    background: #1e40af;
+    transition: 0.3s;
+}
+
 
 /* MAIN CONTAINER */
 .login-container {
