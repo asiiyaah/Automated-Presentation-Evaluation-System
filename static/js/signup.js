@@ -54,3 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
+  /* =========================
+     AUTO SCROLL ON INPUT FOCUS
+  ========================== */
+
+  const signupForm = document.querySelector(".signup-form");
+  const inputs = signupForm.querySelectorAll("input");
+
+  inputs.forEach(input => {
+    input.addEventListener("focus", () => {
+      signupForm.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    });
+  });

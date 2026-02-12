@@ -8,13 +8,74 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="../static/css/upload.css">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+  <!-- Background Video -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="../static/assests/flow_gradient_remix.webm" type="video/webm">
+  </video>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="logo">
+        <img src="../static/assests/logo.png" alt="PresenLytics Logo">
+      </div>
+      <a href="index.html" class="brand">PresenLytics</a>
+    </div>
+
+    <div class="navbar-right">
+      <div class="profile-icon" onclick="toggleProfile()">
+        <img src="../static/assests/profile.svg" alt="profile icon">
+      </div>
+    </div>
+  </header>
+
+  <!-- PROFILE PANEL -->
+  <aside class="profile-panel" id="profilePanel">
+    <h3>Your Profile</h3>
+    <p><strong>Name:</strong> <span id="userName">New User</span></p>
+    <p><strong>Email:</strong> <span id="userEmail">user@email.com</span></p>
+
+    <hr />
+
+    <p>Tags Created: 0</p>
+    <p>Videos Uploaded: 0</p>
+
+    <button class="profile-btn">Edit Profile</button>
+    <button class="profile-btn logout" onclick="logout()">Logout</button>
+  </aside>
+
+  <!-- MAIN PAGE -->
   <div class="page">
     <div class="upload-card">
 
-      <h1 class="heading">Upload Your Presentation</h1>
+      <!-- Heading + Info -->
+      <div class="heading-row">
+        <h1 class="heading">Upload Your Presentation</h1>
+        <span class="info-btn" id="infoBtn">
+           <img src="../static/assests/Info.svg">
+        </span>
+      </div>
+
+      <div class="info-panel" id="infoPanel">
+        <h4>Recording Guidelines</h4>
+        <ul>
+          <li>Ensure proper lighting on your face</li>
+          <li>Keep upper body visible</li>
+          <li>No background noise</li>
+          <li>No other people in frame</li>
+          <li>Use stable camera position</li>
+        </ul>
+      </div>
+
       <p class="subheading">
         Upload your presentation video to receive AI-powered feedback
       </p>
@@ -24,7 +85,6 @@
         <!-- FILE INPUT -->
         <label class="file-box">
           <input type="file" name="video" id="videoInput" accept="video/*" required hidden />
-
           <div class="file-ui" id="fileUI">
             <div class="cloud">☁️</div>
             <p><strong>Click to choose video</strong></p>
@@ -35,7 +95,11 @@
         <!-- VIDEO PREVIEW -->
         <div class="preview-container" id="previewContainer" style="display: none;">
           <video id="videoPreview" controls></video>
-          <p class="file-name" id="fileName"></p>
+
+          <div class="file-info">
+            <span id="fileName" class="file-name"></span>
+            <span class="remove-file" id="removeFile">✕</span>
+          </div>
         </div>
 
         <!-- INPUTS -->
@@ -55,12 +119,11 @@
         </button>
 
       </form>
-
     </div>
   </div>
 
   <!-- JS -->
-  <script src="/static/js/upload.js"></script>
-</body>
+  <script type="module" src="../static/js/upload.js"></script>
 
+</body>
 </html>

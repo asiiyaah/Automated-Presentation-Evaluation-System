@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New User Dashboard</title>
     <link rel="stylesheet" href="../static/css/new-user.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../static/assests/flow_gradient_remix.webm" type="video/webm">
+    </video>
     <!-- NAVBAR -->
     <header class="navbar">
 
@@ -23,8 +28,10 @@
 
     <!-- RIGHT: MENU + PROFILE -->
     <div class="navbar-right">
-        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-        <div class="profile-icon" onclick="toggleProfile()">👤</div>
+        <div class="menu-icon" onclick="toggleSidebar()"><img src="../static/assests/menu.svg" alt="menu"></div>
+        <div class="profile-icon" onclick="toggleProfile()">
+            <img src="../static/assests/profile.svg" alt="profile icon">
+        </div>
     </div>
 
 </header>
@@ -46,8 +53,8 @@
 
         <h3>Quick Actions</h3>
         <ul>
-            <li>Upload Presentation</li>
-            <li>How It Works</li>
+            <a href="upload.html"><li>Upload Presentation</li></a>
+            <a href="analytics.html"><li>View Analytics</li></a>
         </ul>
     </aside>
 
