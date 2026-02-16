@@ -123,3 +123,74 @@ document.addEventListener("click", (e) => {
     profilePanel.classList.remove("open");
   }
 });
+
+/* =======================
+   FORM SUBMIT TO BACKEND
+======================= */
+
+/* =======================
+   FORM SUBMIT TO BACKEND
+======================= */
+
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const file = videoInput.files[0];
+    if (!file) {
+      alert("Please select a video first.");
+      return;
+    }
+
+    const user = auth.currentUser;
+    if (!user) {
+      alert("User not authenticated.");
+      return;
+    }
+
+    const videoTitle =
+      document.getElementById("videoTitleInput")?.value || "Untitled";
+
+    // 🔥 Get tag name (not tag id)
+    const dropdownTag = document.getElementById("tagDropdown")?.value;
+    const newTag = document.getElementById("newTagInput")?.value.trim();
+
+    let selectedTag = "General";
+
+    if (newTag) {
+      selectedTag = newTag;
+    } else if (dropdownTag) {
+      selectedTag = dropdownTag;
+    }
+
+    const formData = new FormData();
+    formData.append("video", file);
+    formData.append("firebase_uid", user.uid);
+    formData.append("tag_name", selectedTag);   // 🔥 IMPORTANT CHANGE
+    formData.append("video_title", videoTitle);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/upload-video",
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || "Upload failed");
+        return;
+      }
+
+      alert("Upload + Analysis Completed ✅");
+      console.log(data);
+
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Upload failed.");
+    }
+  });
+}

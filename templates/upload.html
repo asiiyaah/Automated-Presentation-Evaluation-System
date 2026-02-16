@@ -80,7 +80,8 @@
         Upload your presentation video to receive AI-powered feedback
       </p>
 
-      <form id="uploadForm" enctype="multipart/form-data">
+      <form id="uploadForm" action="/api/upload" 
+  method="POST" enctype="multipart/form-data">
 
         <!-- FILE INPUT -->
         <label class="file-box">
@@ -131,7 +132,7 @@
 
         <div class="input-group">
           <label>Video Title</label>
-          <input type="text" name="video_name" placeholder="Eg: Project Review" required />
+          <input type="text" name="video_name" placeholder="Eg: Project Review" id="videoTitleInput" required />
         </div>
 
         <!-- BUTTON -->
