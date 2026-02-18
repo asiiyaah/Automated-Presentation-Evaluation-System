@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       })
       .then(() => {
-        window.location.href = "new-user.html";
+        window.location.href = "/new-user";
       })
       .catch((error) => {
         alert(error.message);
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signInWithPopup(auth, provider)
       .then(() => {
-        window.location.href = "new-user.html";
+        window.location.href = "/new-user";
       })
       .catch((error) => {
         alert(error.message);

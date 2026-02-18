@@ -7,7 +7,7 @@ import {
 // PROTECT DASHBOARD + LOAD USER INFO
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.location.href = "login.html";
+    window.location.href = "/login";
   } else {
     document.getElementById("userEmail").textContent = user.email;
     document.getElementById("userName").textContent =
@@ -18,7 +18,7 @@ onAuthStateChanged(auth, (user) => {
 // LOGOUT
 window.logout = function () {
   signOut(auth).then(() => {
-    window.location.href = "index.html";
+    window.location.href = "/index";
   });
 };
 

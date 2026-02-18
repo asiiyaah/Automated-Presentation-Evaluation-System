@@ -10,7 +10,7 @@ import {
 
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.location.href = "login.html";
+    window.location.href = "/login";
   } else {
     const emailEl = document.getElementById("userEmail");
     const nameEl = document.getElementById("userName");
@@ -22,7 +22,7 @@ onAuthStateChanged(auth, (user) => {
 
 window.logout = function () {
   signOut(auth).then(() => {
-    window.location.href = "index.html";
+    window.location.href = "/index";
   });
 };
 
@@ -124,9 +124,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/* =======================
-   FORM SUBMIT TO BACKEND
-======================= */
 
 /* =======================
    FORM SUBMIT TO BACKEND
@@ -151,22 +148,28 @@ if (form) {
     const videoTitle =
       document.getElementById("videoTitleInput")?.value || "Untitled";
 
-    // 🔥 Get tag name (not tag id)
+    // 🔥 Get tag values
     const dropdownTag = document.getElementById("tagDropdown")?.value;
     const newTag = document.getElementById("newTagInput")?.value.trim();
 
-    let selectedTag = "General";
+    // 🔥 VALIDATION FIX
+    if (!newTag && !dropdownTag) {
+      alert("Please select an existing tag or enter a new tag.");
+      return;
+    }
+
+    let selectedTag;
 
     if (newTag) {
       selectedTag = newTag;
-    } else if (dropdownTag) {
+    } else {
       selectedTag = dropdownTag;
     }
 
     const formData = new FormData();
     formData.append("video", file);
     formData.append("firebase_uid", user.uid);
-    formData.append("tag_name", selectedTag);   // 🔥 IMPORTANT CHANGE
+    formData.append("tag_name", selectedTag);
     formData.append("video_title", videoTitle);
 
     try {
