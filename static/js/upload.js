@@ -1,4 +1,4 @@
-   // FIREBASE AUTH PROTECTION
+// FIREBASE AUTH PROTECTION
 
 import { auth } from "./firebase.js";
 import {
@@ -6,27 +6,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "/login";
-  } else {
-    const emailEl = document.getElementById("userEmail");
-    const nameEl = document.getElementById("userName");
 
-    if (emailEl) emailEl.textContent = user.email;
-    if (nameEl) nameEl.textContent = user.displayName || "User";
-  }
-});
-
-window.logout = function () {
-  signOut(auth).then(() => {
-    window.location.href = "/";
-  });
-};
-
-
-
-   //VIDEO UPLOAD LOGIC
 
 
 const form = document.getElementById("uploadForm");
@@ -38,6 +18,80 @@ const fileUI = document.getElementById("fileUI");
 const removeFileBtn = document.getElementById("removeFile");
 const infoBtn = document.getElementById("infoBtn");
 const infoPanel = document.getElementById("infoPanel");
+
+
+//  Only one tag selection logic
+const tagDropdown = document.getElementById("tagDropdown");
+const newTagInput = document.getElementById("newTagInput");
+
+// If user types new tag → clear dropdown
+if (newTagInput) {
+  newTagInput.addEventListener("input", () => {
+    if (newTagInput.value.trim() !== "") {
+      tagDropdown.value = "";
+    }
+  });
+}
+
+// If user selects dropdown → clear new tag input
+if (tagDropdown) {
+  tagDropdown.addEventListener("change", () => {
+    if (tagDropdown.value !== "") {
+      newTagInput.value = "";
+    }
+  });
+}
+
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/login";
+    return;
+  }
+
+  // Update profile display
+  const emailEl = document.getElementById("userEmail");
+  const nameEl = document.getElementById("userName");
+
+  if (emailEl) emailEl.textContent = user.email;
+  if (nameEl) nameEl.textContent = user.displayName || "User";
+
+  // 🔥 Fetch tags for dropdown
+  try {
+    const response = await fetch(`/api/get-tags/${user.uid}`);
+    const data = await response.json();
+
+    const dropdown = document.getElementById("tagDropdown");
+    if (dropdown) {
+      dropdown.innerHTML = `<option value="">Select existing tag</option>`;
+
+      data.tags.forEach(tag => {
+        const option = document.createElement("option");
+        option.value = tag.tag_name;
+        option.textContent = tag.tag_name;
+        dropdown.appendChild(option);
+      });
+    }
+
+  } catch (error) {
+    console.error("Error loading tags:", error);
+  }
+
+  // 🔥 Fetch profile stats (to update sidebar)
+  try {
+    const statsRes = await fetch(`/api/user-stats/${user.uid}`);
+    const stats = await statsRes.json();
+
+    const profileTag = document.getElementById("profileTagCount");
+    const profileVideo = document.getElementById("profileVideoCount");
+
+    if (profileTag) profileTag.textContent = stats.tag_count;
+    if (profileVideo) profileVideo.textContent = stats.video_count;
+
+  } catch (error) {
+    console.error("Error loading profile stats:", error);
+  }
+});
 
 /* VIDEO PREVIEW */
 if (videoInput) {
@@ -54,13 +108,13 @@ if (videoInput) {
     fileUI.style.display = "none";
 
     setTimeout(() => {
-  const formBottom = form.getBoundingClientRect().bottom + window.scrollY;
+      const formBottom = form.getBoundingClientRect().bottom + window.scrollY;
 
-  window.scrollTo({
-    top: formBottom - window.innerHeight + 120, 
-    behavior: "smooth"
-  });
-}, 300);
+      window.scrollTo({
+        top: formBottom - window.innerHeight + 120,
+        behavior: "smooth"
+      });
+    }, 300);
 
   });
 }
@@ -78,8 +132,8 @@ if (removeFileBtn) {
 }
 
 
-   // INFO BUTTON TOGGLE
- 
+// INFO BUTTON TOGGLE
+
 
 if (infoBtn) {
   infoBtn.addEventListener("click", (e) => {
@@ -99,7 +153,7 @@ document.addEventListener("click", (e) => {
 });
 
 
-   // PROFILE TOGGLE
+// PROFILE TOGGLE
 
 const profilePanel = document.getElementById("profilePanel");
 
@@ -120,7 +174,7 @@ document.addEventListener("click", (e) => {
 });
 
 
-  // FORM SUBMIT TO BACKEND
+// FORM SUBMIT TO BACKEND
 
 if (form) {
   form.addEventListener("submit", async (e) => {
@@ -146,8 +200,8 @@ if (form) {
     const newTag = document.getElementById("newTagInput")?.value.trim();
 
     // VALIDATION FIX
-    if (!newTag && !dropdownTag) {
-      alert("Please select an existing tag or enter a new tag.");
+    if ((!newTag && !dropdownTag) || (newTag && dropdownTag)) {
+      alert("Please choose either an existing tag OR create a new tag (not both).");
       return;
     }
 
@@ -166,6 +220,11 @@ if (form) {
     formData.append("video_title", videoTitle);
 
     try {
+      //  Show uploading state
+      const uploadBtn = form.querySelector(".upload-btn");
+      uploadBtn.textContent = "Uploading...";
+      uploadBtn.disabled = true;
+
       const response = await fetch(
         "/api/upload-video",
         {
@@ -178,49 +237,22 @@ if (form) {
 
       if (!response.ok) {
         alert(data.error || "Upload failed");
+        uploadBtn.textContent = "Upload & Analyze →";
+        uploadBtn.disabled = false;
         return;
       }
-
       alert("Upload + Analysis Completed ✅");
       console.log(data);
+
+      // Redirect to dashboard
+      window.location.href = "/existing-user";
 
     } catch (error) {
       console.error("Upload error:", error);
       alert("Upload failed.");
+
+      uploadBtn.textContent = "Upload & Analyze →";
+      uploadBtn.disabled = false;
     }
   });
 }
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "/login";
-  } else {
-
-    const emailEl = document.getElementById("userEmail");
-    const nameEl = document.getElementById("userName");
-
-    if (emailEl) emailEl.textContent = user.email;
-    if (nameEl) nameEl.textContent = user.displayName || "User";
-
-    // 🔥 FETCH TAGS HERE
-    const dropdown = document.getElementById("tagDropdown");
-
-    try {
-      const response = await fetch(`/api/get-tags/${user.uid}`);
-      const data = await response.json();
-
-      // Clear old options except first
-      dropdown.innerHTML = `<option value="">Select existing tag</option>`;
-
-      data.tags.forEach(tag => {
-        const option = document.createElement("option");
-        option.value = tag.tag_name;
-        option.textContent = tag.tag_name;
-        dropdown.appendChild(option);
-      });
-
-    } catch (error) {
-      console.error("Error loading tags:", error);
-    }
-  }
-});

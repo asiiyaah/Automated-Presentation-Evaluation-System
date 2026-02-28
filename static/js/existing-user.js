@@ -142,21 +142,3 @@ window.logout = function () {
       alert(error.message);
     });
 };
-
-fetch(`/api/get-tags/${uid}`)
-  .then(res => res.json())
-  .then(data => {
-    const tagList = document.getElementById("tagList");
-    tagList.innerHTML = "";
-
-    if (data.tags.length === 0) {
-      tagList.innerHTML = "<li>No tags created yet</li>";
-      return;
-    }
-
-    data.tags.forEach(tag => {
-      const li = document.createElement("li");
-      li.textContent = tag.tag_name;
-      tagList.appendChild(li);
-    });
-  });

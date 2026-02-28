@@ -247,7 +247,7 @@ li {
 .stats-container {
   display: flex;
   gap: 25px;
-  margin-bottom: 40px;
+  margin: 20px;
   flex-wrap: wrap;
 }
 
@@ -338,6 +338,25 @@ li {
   object-fit: cover;
   z-index: -1;
 }
+
+/* upload button */
+.cta-upload-btn {
+  display: inline-block;
+  margin: 5px 0 30px 0;
+  background: #cbd5f5;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.cta-upload-btn:hover {
+  background: #a5b4fc;
+  transform: translateY(-2px);
+}
+
 
 /* ================= RESPONSIVE ================= */
 

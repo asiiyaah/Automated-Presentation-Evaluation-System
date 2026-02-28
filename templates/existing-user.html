@@ -5,12 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - PresenLytics</title>
+
     <link rel="stylesheet" href="../static/css/existing-user.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='assests/logo.png') }}">
+
+    <link rel="icon" type="image/png"
+        href="{{ url_for('static', filename='assests/logo.png') }}">
 </head>
 
 <body>
@@ -22,98 +24,92 @@
 
     <!-- NAVBAR -->
     <header class="navbar">
-
         <div class="navbar-left">
             <div class="logo">
-                <img src="../static/assests/logo.png" alt="PresenLytics Logo">
+                <img src="../static/assests/logo.png" alt="Logo">
             </div>
             <a href="/index" class="brand">PresenLytics</a>
         </div>
 
         <div class="navbar-right">
             <div class="menu-icon" onclick="toggleSidebar()">
-                <img src="../static/assests/menu.svg" alt="menu">
+                <img src="../static/assests/menu.svg">
             </div>
             <div class="profile-icon" onclick="toggleProfile()">
-                <img src="../static/assests/profile.svg" alt="profile icon">
+                <img src="../static/assests/profile.svg">
             </div>
         </div>
-
     </header>
-
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-
         <h3>Your Tags</h3>
-
-        <!-- Tag List -->
         <ul class="tag-list" id="tagList"></ul>
 
         <h3>Quick Actions</h3>
         <ul>
-            <a href="/upload">
-                <li>Upload Presentation</li>
-            </a>
-            <a href="/analytics">
-                <li>View Analytics</li>
-            </a>
+            <a href="/upload"><li>Upload Presentation</li></a>
+            <a href="/analytics"><li>View Analytics</li></a>
         </ul>
-
     </aside>
-
 
     <!-- PROFILE PANEL -->
     <aside class="profile-panel" id="profilePanel">
         <h3>Your Profile</h3>
-
-        <p><strong>Name:</strong> <span id="userName">Asiya</span></p>
-        <p><strong>Email:</strong> <span id="userEmail">asiya@email.com</span></p>
-
+        <p><strong>Name:</strong> <span id="userName">User</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">user@email.com</span></p>
         <hr />
-
         <p>Tags Created: <span id="profileTagCount">0</span></p>
         <p>Videos Uploaded: <span id="profileVideoCount">0</span></p>
         <button class="profile-btn">Edit Profile</button>
         <button class="profile-btn logout" onclick="logout()">Logout</button>
-
     </aside>
 
-
-    <!-- MAIN DASHBOARD CONTENT -->
+    <!-- MAIN DASHBOARD -->
     <main class="dashboard">
 
-        <h1>WELCOME BACK 👋</h1>
-        <p class="subtitle">Track, Analyze & Improve Your Presentation Skills</p>
-
-        <!-- STATS CARDS -->
-        <div class="stats-container">
-
-            <div class="stat-card">
-                <h2 id="videoCount">0</h2>
-                <p>Total Videos</p>
-
-
+        <!-- Header Section -->
+        <div class="dashboard-header">
+            <div>
+                <h1>WELCOME BACK 👋</h1>
+                <p class="subtitle">
+                    Track, Analyze & Improve Your Presentation Skills
+                </p>
             </div>
 
-            <div class="stat-card">
-                <h2 id="tagCount">0</h2>
-                <p>Active Tags</p>
-            </div>
-
-            <div class="stat-card">
-                <h2 id="avgScore">0%</h2>
-                <p>Average Confidence Score</p>
-            </div>
-
+            <a href="/upload" class="cta-upload-btn">
+                + Upload Presentation
+            </a>
         </div>
 
-        <!-- RECENT UPLOADS -->
+        <!-- Performance Section -->
+        <section class="performance-section">
+            <h2 class="section-title">Performance Overview</h2>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h2 id="videoCount">0</h2>
+                    <p>Total Videos</p>
+                </div>
+
+                <div class="stat-card">
+                    <h2 id="tagCount">0</h2>
+                    <p>Active Tags</p>
+                </div>
+
+                <div class="stat-card">
+                    <h2 id="avgScore">0%</h2>
+                    <p>Average Confidence Score</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Uploads -->
         <section class="recent-section">
-            <h2>Recent Presentations</h2>
+            <h2 class="section-title">Recent Presentations</h2>
 
             <div class="video-list" id="videoList">
-                <!-- Videos will be inserted dynamically -->
+                <!-- Dynamic cards -->
             </div>
         </section>
 
@@ -122,5 +118,4 @@
     <script type="module" src="../static/js/existing-user.js"></script>
 
 </body>
-
 </html>
