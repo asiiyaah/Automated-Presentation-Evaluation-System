@@ -55,9 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-  /* =========================
-     AUTO SCROLL ON INPUT FOCUS
-  ========================== */
+     //AUTO SCROLL ON INPUT FOCUS
+  
 
   const signupForm = document.querySelector(".signup-form");
   const inputs = signupForm.querySelectorAll("input");

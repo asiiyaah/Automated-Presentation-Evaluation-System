@@ -8,10 +8,9 @@ import random
 import cloudinary
 import cloudinary.uploader
 
-# 🔥 Load environment variables FIRST
 load_dotenv()
 
-# 🔥 Configure Cloudinary
+#  Configure Cloudinary
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
     api_key=os.getenv("CLOUDINARY_API_KEY"),
@@ -21,9 +20,9 @@ cloudinary.config(
 app = Flask(__name__)
 CORS(app)
 
-# =========================
+
 # DATABASE CONFIG
-# =========================
+
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -42,9 +41,8 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 
 db = SQLAlchemy(app)
 
-# =========================
+
 # MODELS
-# =========================
 
 class User(db.Model):
     __tablename__ = "users"
@@ -99,9 +97,9 @@ class Analysis(db.Model):
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# =========================
+
 # ROUTES
-# =========================
+
 
 @app.route("/api/upload-video", methods=["POST"])
 def upload_video():
@@ -118,21 +116,21 @@ def upload_video():
     if not firebase_uid:
         return jsonify({"error": "firebase_uid missing"}), 400
 
-    # 🔥 Auto-create user if not exists
+    # Auto-create user if not exists
     user = User.query.filter_by(firebase_uid=firebase_uid).first()
     if not user:
         user = User(firebase_uid=firebase_uid, email=email)
         db.session.add(user)
         db.session.commit()
 
-    # 🔥 Find or create tag
+    #Find or create tag
     tag = Tag.query.filter_by(user_id=user.id, tag_name=tag_name).first()
     if not tag:
         tag = Tag(tag_name=tag_name, user_id=user.id)
         db.session.add(tag)
         db.session.commit()
 
-    # 🔥 Upload to Cloudinary (FIXED HERE)
+    # Upload to Cloudinary (FIXED HERE)
     try:
         result = cloudinary.uploader.upload_large(
             video_file.stream,   # ✅ USE STREAM
@@ -144,7 +142,7 @@ def upload_video():
         print("CLOUDINARY ERROR:", e)
         return jsonify({"error": str(e)}), 500
 
-    # 🔥 Save video
+    # Save video
     new_video = Video(
         video_title=video_title,
         cloudinary_url=cloudinary_url,
@@ -154,7 +152,7 @@ def upload_video():
     db.session.add(new_video)
     db.session.commit()
 
-    # 🔥 Dummy Analysis
+    # Dummy Analysis
     speech_rate = round(random.uniform(120, 160), 2)
     filler_words = random.randint(5, 20)
     posture_score = round(random.uniform(60, 95), 2)
@@ -188,10 +186,7 @@ def upload_video():
     })
 
 
-# =========================
-# PAGE ROUTES
-# =========================
-
+#page routes
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -208,6 +203,37 @@ def new_user():
 def upload_page():
     return render_template("upload.html")
 
+@app.route("/api/get-tags/<firebase_uid>", methods=["GET"])
+def get_tags(firebase_uid):
+
+    user = User.query.filter_by(firebase_uid=firebase_uid).first()
+
+    if not user:
+        return jsonify({"tags": []})
+
+    tags = Tag.query.filter_by(user_id=user.id).all()
+
+    tag_list = [{"id": tag.id, "tag_name": tag.tag_name} for tag in tags]
+
+    return jsonify({"tags": tag_list})
+@app.route("/api/user-stats/<firebase_uid>", methods=["GET"])
+def user_stats(firebase_uid):
+
+    user = User.query.filter_by(firebase_uid=firebase_uid).first()
+
+    if not user:
+        return jsonify({
+            "tag_count": 0,
+            "video_count": 0
+        })
+
+    tag_count = Tag.query.filter_by(user_id=user.id).count()
+    video_count = Video.query.filter_by(user_id=user.id).count()
+
+    return jsonify({
+        "tag_count": tag_count,
+        "video_count": video_count
+    })
 
 if __name__ == "__main__":
     with app.app_context():

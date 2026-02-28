@@ -1,6 +1,4 @@
-/* =========================
-   FIREBASE AUTH PROTECTION
-========================= */
+   // FIREBASE AUTH PROTECTION
 
 import { auth } from "./firebase.js";
 import {
@@ -27,9 +25,9 @@ window.logout = function () {
 };
 
 
-/* =========================
-   VIDEO UPLOAD LOGIC
-========================= */
+
+   //VIDEO UPLOAD LOGIC
+
 
 const form = document.getElementById("uploadForm");
 const videoInput = document.getElementById("videoInput");
@@ -80,9 +78,8 @@ if (removeFileBtn) {
 }
 
 
-/* =========================
-   INFO BUTTON TOGGLE
-========================= */
+   // INFO BUTTON TOGGLE
+ 
 
 if (infoBtn) {
   infoBtn.addEventListener("click", (e) => {
@@ -102,9 +99,7 @@ document.addEventListener("click", (e) => {
 });
 
 
-/* =======================
-   PROFILE TOGGLE
-======================= */
+   // PROFILE TOGGLE
 
 const profilePanel = document.getElementById("profilePanel");
 
@@ -125,9 +120,7 @@ document.addEventListener("click", (e) => {
 });
 
 
-/* =======================
-   FORM SUBMIT TO BACKEND
-======================= */
+  // FORM SUBMIT TO BACKEND
 
 if (form) {
   form.addEventListener("submit", async (e) => {
@@ -148,11 +141,11 @@ if (form) {
     const videoTitle =
       document.getElementById("videoTitleInput")?.value || "Untitled";
 
-    // 🔥 Get tag values
+    // Get tag values
     const dropdownTag = document.getElementById("tagDropdown")?.value;
     const newTag = document.getElementById("newTagInput")?.value.trim();
 
-    // 🔥 VALIDATION FIX
+    // VALIDATION FIX
     if (!newTag && !dropdownTag) {
       alert("Please select an existing tag or enter a new tag.");
       return;
@@ -174,7 +167,7 @@ if (form) {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/upload-video",
+        "/api/upload-video",
         {
           method: "POST",
           body: formData
@@ -197,3 +190,37 @@ if (form) {
     }
   });
 }
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/login";
+  } else {
+
+    const emailEl = document.getElementById("userEmail");
+    const nameEl = document.getElementById("userName");
+
+    if (emailEl) emailEl.textContent = user.email;
+    if (nameEl) nameEl.textContent = user.displayName || "User";
+
+    // 🔥 FETCH TAGS HERE
+    const dropdown = document.getElementById("tagDropdown");
+
+    try {
+      const response = await fetch(`/api/get-tags/${user.uid}`);
+      const data = await response.json();
+
+      // Clear old options except first
+      dropdown.innerHTML = `<option value="">Select existing tag</option>`;
+
+      data.tags.forEach(tag => {
+        const option = document.createElement("option");
+        option.value = tag.tag_name;
+        option.textContent = tag.tag_name;
+        dropdown.appendChild(option);
+      });
+
+    } catch (error) {
+      console.error("Error loading tags:", error);
+    }
+  }
+});

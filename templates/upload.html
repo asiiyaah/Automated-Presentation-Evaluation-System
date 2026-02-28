@@ -82,7 +82,7 @@
 
       <form id="uploadForm" action="/api/upload" 
   method="POST" enctype="multipart/form-data">
-
+<input type="hidden" name="firebase_uid" id="firebaseUidInput">
         <!-- FILE INPUT -->
         <label class="file-box">
           <input type="file" name="video" id="videoInput" accept="video/*" required hidden />
@@ -110,10 +110,9 @@
   <label>Select Person (Tag)</label>
 
   <!-- Dropdown -->
-  <select id="tagDropdown" name="tag">
+  <select id="tagDropdown" name="tag_name">
     <option value="">Select existing tag</option>
-    <option value="john">John</option>
-    <option value="aasi">Aasi</option>
+    
   </select>
 
   <!-- Divider -->
