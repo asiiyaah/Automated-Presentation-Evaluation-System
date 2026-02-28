@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
       
-        window.location.href = "/new-user";
+        window.location.href = "/existing-user";
       })
       .catch((error) => {
         alert(error.message);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signInWithPopup(auth, provider)
       .then(() => {
-        window.location.href = "/new-user";
+        window.location.href = "/existing-user";
       })
       .catch((error) => {
         alert(error.message);

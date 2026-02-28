@@ -190,6 +190,9 @@ def upload_video():
 @app.route("/")
 def home():
     return render_template("index.html")
+@app.route("/index")
+def index():
+    return render_template("index.html")
 @app.route("/login") 
 def login_page(): 
     return render_template("login.html") 
@@ -202,6 +205,9 @@ def new_user():
 @app.route("/upload")
 def upload_page():
     return render_template("upload.html")
+@app.route("/existing-user")
+def existing_user():
+    return render_template("existing-user.html")    
 
 @app.route("/api/get-tags/<firebase_uid>", methods=["GET"])
 def get_tags(firebase_uid):

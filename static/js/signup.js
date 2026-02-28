@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".signup-form");
   const googleBtn = document.getElementById("googleSignupBtn");
 
-  // EMAIL + PASSWORD SIGNUP
+ 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((cred) => {
-        // Save name to Firebase profile
         return updateProfile(cred.user, {
           displayName: fullName
         });
@@ -41,13 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  // GOOGLE SIGNUP
   googleBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     signInWithPopup(auth, provider)
-      .then(() => {
-        window.location.href = "/new-user";
+      .then((result) => {
+        if (result._tokenResponse.isNewUser) {
+          window.location.href = "/new-user";
+        } else {
+          window.location.href = "/existing-user";
+        }
       })
       .catch((error) => {
         alert(error.message);
@@ -55,17 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-     //AUTO SCROLL ON INPUT FOCUS
-  
 
-  const signupForm = document.querySelector(".signup-form");
-  const inputs = signupForm.querySelectorAll("input");
 
-  inputs.forEach(input => {
-    input.addEventListener("focus", () => {
-      signupForm.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+const signupForm = document.querySelector(".signup-form");
+const inputs = signupForm.querySelectorAll("input");
+
+inputs.forEach(input => {
+  input.addEventListener("focus", () => {
+    signupForm.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
     });
   });
+});
