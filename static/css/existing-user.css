@@ -1,3 +1,5 @@
+/* ================= GLOBAL ================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -27,12 +29,10 @@ li {
 
 .navbar {
   height: 90px;
-  color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  top: 0;
   z-index: 1000;
 }
 
@@ -67,61 +67,20 @@ li {
   font-size: 32px;
   font-weight: 900;
   color: #ffffff;
-  margin-left: 5px;
   text-decoration: none;
   cursor: pointer;
 }
 
-.menu-icon,
-.profile-icon {
-  font-size: 26px;
+.menu-icon img,
+.profile-icon img {
+  width: 26px;
   cursor: pointer;
-  user-select: none;
-  color: #142d6c;
+  transition: 0.3s ease;
 }
 
-.menu-icon:hover,
-.profile-icon:hover { 
-  opacity: 1;
+.menu-icon img:hover,
+.profile-icon img:hover {
   transform: scale(1.1);
-}
-
-/* ================= HERO ================= */
-
-.hero {
-  height: calc(100vh - 90px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.hero h2 {
-  font-size: 28px;
-  margin-top: 10px;
-}
-
-.cta-btn {
-  margin-top: 40px;
-  background: #cbd5f5;
-  color: #000;
-  border: none;
-  padding: 14px 35px;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.cta-btn:hover {
-  background: #a5b4fc;
-  transform: translateY(-2px);
-    transition: 0.3s ease;
 }
 
 /* ================= SIDEBAR ================= */
@@ -139,7 +98,7 @@ li {
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.sidebar.open {
+.sidebar.active {
   right: 0;
 }
 
@@ -171,6 +130,25 @@ li {
   transform: translateX(3px);
 }
 
+/* ADD TAG BUTTON */
+
+.add-tag-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 9px;
+  border-radius: 20px;
+  border: none;
+  background: #cbd5f5;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.add-tag-btn:hover {
+  background: #a5b4fc;
+  transform: translateY(-2px);
+}
+
 /* EMPTY STATE */
 
 .empty-state {
@@ -191,25 +169,6 @@ li {
   opacity: 0.8;
   display: block;
   margin-bottom: 10px;
-}
-
-/* ADD TAG BUTTON */
-
-.add-tag-btn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 9px;
-  border-radius: 20px;
-  border: none;
-  background: #cbd5f5;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s ease;
-}
-
-.add-tag-btn:hover {
-  background: #a5b4fc;
-  transform: translateY(-2px);
 }
 
 /* QUICK ACTIONS */
@@ -235,8 +194,7 @@ li {
   text-decoration: none;
   color: white;
 }
-
-/* ================= PROFILE PANEL (RIGHT, ABOVE TAGS) ================= */
+/* ================= PROFILE PANEL ================= */
 
 .profile-panel {
   position: fixed;
@@ -247,10 +205,10 @@ li {
   background: #062041;
   padding: 20px;
   transition: right 0.3s ease;
-  z-index: 100;
+  z-index: 1000;
 }
 
-.profile-panel.open {
+.profile-panel.active {
   right: 0;
 }
 
@@ -271,11 +229,12 @@ li {
   background: #cbd5f5;
   border-radius: 20px;
   cursor: pointer;
+  transition: 0.3s ease;
 }
+
 .profile-btn:hover {
   background: #a5b4fc;
   transform: translateY(-2px);
-    transition: 0.3s ease;
 }
 
 .logout {
@@ -283,46 +242,130 @@ li {
   color: white;
 }
 
-/* ================= SHARED ================= */
+/* ================= DASHBOARD SECTION ================= */
 
-.empty-state {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 10px;
+.dashboard {
+  padding-top: 110px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.dashboard h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+/* ================= STATS CARDS ================= */
+
+.stats-container {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 180px;
+  background: #062041;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.stat-card:hover {
+  background: #0a2c57;
+  transform: translateY(-4px);
+}
+
+.stat-card h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
   font-size: 14px;
-}
-
-.empty-state p {
-  font-weight: 600;
-}
-
-.empty-state small {
-  font-size: 12px;
   opacity: 0.8;
 }
 
-.add-tag-btn {
-  margin-top: 12px;
-  width: 100%;
-  padding: 8px;
-  border-radius: 20px;
-  border: none;
-  background: #cbd5f5;
-  cursor: pointer;
-  font-weight: 600;
+/* ================= RECENT VIDEOS ================= */
+
+.recent-section h2 {
+  margin-bottom: 20px;
 }
-.add-tag-btn:hover {  
+
+.video-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.video-card {
+  background: #062041;
+  padding: 18px;
+  border-radius: 12px;
+  width: 260px;
+  transition: 0.3s ease;
+}
+
+.video-card:hover {
+  background: #0a2c57;
+  transform: translateY(-4px);
+}
+
+.video-card h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.video-card p {
+  font-size: 13px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.view-btn {
+  display: inline-block;
+  background: #cbd5f5;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.view-btn:hover {
   background: #a5b4fc;
   transform: translateY(-2px);
-    transition: 0.3s ease;
 }
+
+/* ================= BACKGROUND VIDEO ================= */
 
 .bg-video {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index:-1;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+  }
+
+  .video-list {
+    flex-direction: column;
+  }
+}
