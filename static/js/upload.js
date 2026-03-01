@@ -242,11 +242,9 @@ if (form) {
         return;
       }
       alert("Upload + Analysis Completed ✅");
-      console.log(data);
 
       // Redirect to dashboard
-      window.location.href = "/existing-user";
-
+window.location.href = `/analysis?video_id=${data.video_id}`;
     } catch (error) {
       console.error("Upload error:", error);
       alert("Upload failed.");

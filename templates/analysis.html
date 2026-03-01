@@ -74,14 +74,23 @@
         <section class="performance-section">
             <h2 class="section-title">Overall Performance</h2>
 
-            <div class="stats-container">
+            <div class="overall-layout">
 
-                <div class="stat-card large-score">
-                    <h2>{{ analysis.overall_score }}%</h2>
-                    <p>Overall Confidence Score</p>
-                </div>
+    <!-- Left Square Box -->
+    <div class="stat-card overall-box">
+        <h2>{{ analysis.overall_score }}%</h2>
+        <p>Overall Confidence Score</p>
+    </div>
 
-            </div>
+    <!-- Right Video Preview Box -->
+    <div class="video-box">
+        <video controls>
+        <source src="{{ video.cloudinary_url }}" type="video/mp4">
+        Your browser does not support the video tag.        
+        </video>
+    </div>
+
+</div>
         </section>
 
         <!-- Metrics -->

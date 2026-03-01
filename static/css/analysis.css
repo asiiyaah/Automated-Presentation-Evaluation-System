@@ -207,3 +207,54 @@ body {
   object-fit: cover;
   z-index: -1;
 }
+/* ================= OVERALL SECTION ================= */
+
+.overall-layout {
+  display: flex;
+  gap: 100px;
+  align-items: stretch;
+}
+
+/* Override default flex:1 */
+.overall-box {
+  flex: 0 0 380px;   /* fixed width */
+  height: 380px;     /* make it square */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Bigger percentage */
+.overall-box h2 {
+  font-size:56px;
+}
+
+/* Video rectangle */
+.video-box {
+  flex: 0 0 600px;   /* FIXED width — prevents over stretching */
+  height: 380px;     /* match score height */
+  background: #062041;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-box video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+@media (max-width: 900px) {
+  .overall-layout {
+    flex-direction: column;
+  }
+
+  .overall-box {
+    width: 100%;
+    height: 250px;
+  }
+}
