@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tag Analytics - PresenLytics</title>
+
+    <link rel="stylesheet" href="../static/css/analytics.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='assests/logo.png') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Background -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../static/assests/flow_gradient_remix.webm" type="video/webm">
+    </video>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <div class="logo">
+                <img src="../static/assests/logo.png" alt="Logo">
+            </div>
+            <a href="/index" class="brand">PresenLytics</a>
+        </div>
+
+        <div class="navbar-right">
+            <div class="profile-icon" onclick="toggleProfile()">
+                <img src="../static/assests/profile.svg">
+            </div>
+        </div>
+    </header>
+    <aside class="profile-panel" id="profilePanel">
+        <h3>Your Profile</h3>
+        <p><strong>Name:</strong> <span id="userName">User</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">user@email.com</span></p>
+        <hr />
+        <p>Tags Created: <span id="profileTagCount">0</span></p>
+        <p>Videos Uploaded: <span id="profileVideoCount">0</span></p>
+        <button class="profile-btn">Edit Profile</button>
+        <button class="profile-btn logout" onclick="logout()">Logout</button>
+    </aside>
+    <!-- MAIN CONTENT -->
+    <main class="dashboard">
+
+        <!-- Tag Header -->
+        <div class="dashboard-header">
+            <div>
+                <h1 id="tagTitle">Tag: Public Speaking</h1>
+                <p class="subtitle">
+                    Performance insights for this tag
+                </p>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <section class="performance-section">
+            <h2 class="section-title">Tag Performance Overview</h2>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h2 id="totalVideos">5</h2>
+                    <p>Total Videos</p>
+                </div>
+
+                <div class="stat-card">
+                    <h2 id="avgScore">82%</h2>
+                    <p>Average Confidence Score</p>
+                </div>
+
+                <div class="stat-card">
+                    <h2 id="bestScore">91%</h2>
+                    <p>Best Performance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="recent-section">
+            <h2 class="section-title">Performance Graphs</h2>
+
+            <div class="charts-container">
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Confidence Trend</h3>
+                    <canvas id="scoreChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Skill Breakdown</h3>
+                    <canvas id="improvementChart"></canvas>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Videos Under This Tag -->
+        <section class="recent-section">
+            <h2 class="section-title">Videos Under This Tag</h2>
+            <div class="video-list">
+
+                <div class="video-card">
+                    <h3>Effective Communication Skills</h3>
+                    <p class="video-date">Uploaded on: 12 Feb 2026</p>
+                    <p class="video-score">Confidence Score: 75%</p>
+                </div>
+
+                <div class="video-card">
+                    <h3>Seminar on AI Ethics</h3>
+                    <p class="video-date">Uploaded on: 18 Feb 2026</p>
+                    <p class="video-score">Confidence Score: 82%</p>
+                </div>
+
+                <div class="video-card">
+                    <h3>Project Presentation - Phase 1</h3>
+                    <p class="video-date">Uploaded on: 25 Feb 2026</p>
+                    <p class="video-score">Confidence Score: 91%</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="../static/js/analytics.js"></script>
+</body>
+
+</html>

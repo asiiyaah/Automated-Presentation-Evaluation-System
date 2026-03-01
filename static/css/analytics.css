@@ -1,0 +1,344 @@
+/* ================= GLOBAL ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at center, #0b1535, #050a1f);
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+  font-family: "Tektur", sans-serif;
+}
+
+button,
+a,
+h1,
+h2,
+h3,
+h4,
+p,
+li {
+  font-family: "Tektur", sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.brand {
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu-icon img,
+.profile-icon img {
+  width: 26px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.menu-icon img:hover,
+.profile-icon img:hover {
+  transform: scale(1.1);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+  position: fixed;
+  top: 90px;
+  right: -270px;
+  width: 270px;
+  height: calc(100vh - 90px);
+  background: #062041;
+  padding: 25px 20px;
+  transition: right 0.3s ease;
+  z-index: 999;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar h3 {
+  margin-top: 15px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* TAG LIST */
+
+.tag-list {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.tag-list li {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 15px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.tag-list li:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+/* ================= PROFILE PANEL ================= */
+
+.profile-panel {
+  position: fixed;
+  top: 90px;
+  right: -300px;
+  width: 300px;
+  height: calc(100vh - 90px);
+  background: #062041;
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.profile-panel.active {
+  right: 0;
+}
+
+.profile-panel h3 {
+  margin-bottom: 15px;
+}
+
+.profile-panel p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.profile-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  background: #cbd5f5;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.profile-btn:hover {
+  background: #a5b4fc;
+  transform: translateY(-2px);
+}
+
+.logout {
+  background: #ff5b5b;
+  color: white;
+}
+
+/* ================= DASHBOARD SECTION ================= */
+
+.dashboard {
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.dashboard h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+/* ================= STATS CARDS ================= */
+
+.stats-container {
+  display: flex;
+  gap: 25px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 200px;
+  background: #062041;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.stat-card:hover {
+  background: #0a2c57;
+  transform: translateY(-5px);
+}
+
+.stat-card h2 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ================= VIDEO CARDS ================= */
+
+.video-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.video-card {
+  background: #062041;
+  padding: 18px;
+  border-radius: 12px;
+  width: 260px;
+  transition: 0.3s ease;
+}
+
+.video-card:hover {
+  background: #0a2c57;
+  transform: translateY(-4px);
+}
+
+.video-card h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.video-card p {
+  font-size: 13px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.view-btn {
+  display: inline-block;
+  background: #cbd5f5;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.view-btn:hover {
+  background: #a5b4fc;
+  transform: translateY(-2px);
+}
+
+/* ================= ANALYTICS CHARTS ================= */
+
+.charts-container {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.chart-card {
+  flex: 1;
+  max-width: 500px;
+  background: #062041;
+  padding: 25px;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.chart-card:hover {
+  background: #0a2c57;
+  transform: translateY(-5px);
+}
+
+canvas {
+  max-height: 300px;
+}
+
+/* ================= BACKGROUND VIDEO ================= */
+
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .stats-container {
+    flex-direction: column;
+  }
+
+  .charts-container {
+    flex-direction: column;
+  }
+
+  .video-list {
+    flex-direction: column;
+  }
+}
+
+.dashboard section {
+  margin-bottom: 60px;
+}

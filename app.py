@@ -226,6 +226,9 @@ def analysis():
         analysis=video.analysis,
         tag_name=video.tag.tag_name   # 🔥 ADD THIS
     )
+@app.route("/analytics")
+def analytics():
+    return render_template("analytics.html")
 @app.route("/api/get-tags/<firebase_uid>", methods=["GET"])
 def get_tags(firebase_uid):
 

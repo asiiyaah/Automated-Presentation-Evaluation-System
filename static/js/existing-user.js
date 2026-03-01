@@ -53,16 +53,16 @@ onAuthStateChanged(auth, (user) => {
 
     // 🔹 Fetch Stats
     fetch(`/api/user-stats/${uid}`)
-  .then(res => res.json())
-  .then(stats => {
-    document.getElementById("videoCount").textContent = stats.video_count;
-    document.getElementById("tagCount").textContent = stats.tag_count;
+      .then(res => res.json())
+      .then(stats => {
+        document.getElementById("videoCount").textContent = stats.video_count;
+        document.getElementById("tagCount").textContent = stats.tag_count;
 
-    document.getElementById("profileVideoCount").textContent = stats.video_count;
-    document.getElementById("profileTagCount").textContent = stats.tag_count;
+        document.getElementById("profileVideoCount").textContent = stats.video_count;
+        document.getElementById("profileTagCount").textContent = stats.tag_count;
 
-    document.getElementById("avgScore").textContent = stats.avg_score + "%";
-  });
+        document.getElementById("avgScore").textContent = stats.avg_score + "%";
+      });
 
     // 🔹 Fetch Tags
     fetch(`/api/get-tags/${uid}`)
@@ -79,6 +79,9 @@ onAuthStateChanged(auth, (user) => {
         data.tags.forEach(tag => {
           const li = document.createElement("li");
           li.textContent = tag.tag_name;
+          li.addEventListener("click", () => {
+           window.location.href = `/analytics?tag=${encodeURIComponent(tag.tag_name)}`;
+          });
           tagList.appendChild(li);
         });
       });
