@@ -23,22 +23,39 @@ onAuthStateChanged(auth, (user) => {
     }
 
     const uid = user.uid;
+    const params = new URLSearchParams(window.location.search);
+const videoId = params.get("d");
+ 
+    fetch(`/api/video-analysis?video_id=${videoId}`)
+  .then(res => res.json())
+  .then(data => {
+      console.log("Video Analysis:", data);
 
-    // 🔹 Fetch Stats for Profile Panel
-    fetch(`/api/user-stats/${uid}`)
-      .then(res => res.json())
-      .then(stats => {
-        const profileVideo = document.getElementById("profileVideoCount");
-        const profileTag = document.getElementById("profileTagCount");
+      // Example: Update page elements
+      document.getElementById("videoTitle").textContent = data.title;
+      document.getElementById("confidenceScore").textContent = data.overall_score + "%";
+      document.getElementById("fillerScore").textContent = data.filler_words;
+      document.getElementById("postureScore").textContent = data.posture_score;
+      document.getElementById("eyeScore").textContent = data.eye_contact_score;
+      document.getElementById("gestureScore").textContent = data.gesture_score;
+  });
+  fetch(`/api/user-stats/${uid}`)
+  .then(res => res.json())
+  .then(stats => {
 
-        if (profileVideo) {
-          profileVideo.textContent = stats.video_count;
-        }
+    const profileVideo = document.getElementById("profileVideoCount");
+    const profileTag = document.getElementById("profileTagCount");
 
-        if (profileTag) {
-          profileTag.textContent = stats.tag_count;
-        }
-      });
+    if (profileVideo) {
+      profileVideo.textContent = stats.video_count;
+    }
+
+    if (profileTag) {
+      profileTag.textContent = stats.tag_count;
+    }
+
+  });
+
 
   } else {
     window.location.href = "/login";

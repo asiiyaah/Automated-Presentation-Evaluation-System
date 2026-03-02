@@ -340,6 +340,7 @@ def tag_analytics():
     for video in videos:
         if video.analysis:
             video_data.append({
+                "id": video.id,
                 "title": video.video_title,
                 "upload_date": video.upload_date.strftime("%d %b %Y"),
                 "overall_score": video.analysis.overall_score,

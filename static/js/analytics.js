@@ -7,7 +7,7 @@ import {
 /* ===============================
    WAIT FOR FIREBASE AUTH
 ================================= */
-
+document.addEventListener("DOMContentLoaded", () => {
 onAuthStateChanged(auth, (user) => {
 
   if (!user) {
@@ -16,7 +16,23 @@ onAuthStateChanged(auth, (user) => {
   }
 
   const firebase_uid = user.uid;
+// 🔥 Fetch user stats (update profile panel counts)
+fetch(`/api/user-stats/${firebase_uid}`)
+  .then(res => res.json())
+  .then(stats => {
 
+    const profileVideo = document.getElementById("profileVideoCount");
+    const profileTag = document.getElementById("profileTagCount");
+
+    if (profileVideo) {
+      profileVideo.textContent = stats.video_count;
+    }
+
+    if (profileTag) {
+      profileTag.textContent = stats.tag_count;
+    }
+
+  });
   const params = new URLSearchParams(window.location.search);
   const tag = params.get("tag") || "Public Speaking";
 
@@ -24,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
 
   loadTagAnalytics(firebase_uid, tag);
 });
-
+});
 
 /* ===============================
    LOAD ANALYTICS DATA
@@ -48,6 +64,10 @@ async function loadTagAnalytics(firebase_uid, tag) {
   }
 
   const videos = data.videos;
+  const totalVideosEl = document.getElementById("totalVideos");
+if (totalVideosEl) {
+  totalVideosEl.textContent = videos.length;
+}
 
   const labels = videos.map(v => v.title);
   const scores = videos.map(v => v.overall_score);
@@ -98,6 +118,34 @@ if (bestScoreEl) bestScoreEl.textContent = bestPerformance + "%";
       }]
     }
   });
+
+  // 🔥 Render Videos Under This Tag
+const videoList = document.getElementById("videoList");
+videoList.innerHTML = "";
+
+videos.forEach(video => {
+  
+  const card = document.createElement("div");
+  card.className = "video-card";
+
+  card.innerHTML = `
+    <div class="video-card-header">
+        <h3>${video.title}</h3>
+        <button class="icon-btn delete-video-btn">
+            <img src="../static/assests/delete.svg" alt="Delete Video">
+        </button>
+    </div>
+    <p class="video-date">Uploaded on: ${video.upload_date}</p>
+    <p class="video-score">Confidence Score: ${video.overall_score}%</p>
+  `;
+
+  // 🔥 Redirect to Analysis Page
+  card.addEventListener("click", () => {
+    window.location.href = `/analysis?video_id=${video.id}`;
+  });
+
+  videoList.appendChild(card);
+});
 }
 
 
